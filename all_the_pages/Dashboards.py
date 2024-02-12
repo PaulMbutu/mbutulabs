@@ -42,7 +42,7 @@ def the_titanic():
         index_h_c=l1.index(h_c)
         return f"{l2[index_h_c]} occurs {h_c} times"
 
-    excel_file = "info_datasets\Titanic.xlsx"
+    excel_file = "info_datasets/Titanic.xlsx"
     sheet_name = "DATA"
 
     df = pd.read_excel(excel_file,
