@@ -34,7 +34,7 @@ def the_titanic():
             unsafe_allow_html=True
         )
 
-    set_bg_hack(r"C:\Users\manch\OneDrive\Documents\dev\mbutulabs\57731.gif")
+    set_bg_hack(r"57731.gif")
 
 
     def mode(l1:list,l2:list):#l1 list of counts l2 list of values
@@ -42,7 +42,7 @@ def the_titanic():
         index_h_c=l1.index(h_c)
         return f"{l2[index_h_c]} occurs {h_c} times"
 
-    excel_file = r"C:\Users\manch\OneDrive\Documents\dev\mbutulabs\info_datasets\Titanic.xlsx"
+    excel_file = r"info_datasets\Titanic.xlsx"
     sheet_name = "DATA"
 
     df = pd.read_excel(excel_file,
