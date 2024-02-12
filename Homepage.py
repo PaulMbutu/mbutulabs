@@ -5,7 +5,7 @@ import time
 
 class Home:
     def __init__(self) -> None:
-        self.file_path = "C:/Users/manch/OneDrive/Documents/dev/mbutulabs/57731.gif"
+        self.file_path = "57731.gif"
 
     def get_base64_of_bin_file(self):
         try:
