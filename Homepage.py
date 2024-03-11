@@ -3,6 +3,7 @@ from all_the_pages.Dashboards import the_titanic, bank_sales
 import base64
 import time
 
+
 class Home:
     def __init__(self) -> None:
         self.file_path = "57731.gif"
