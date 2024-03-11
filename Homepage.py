@@ -4,6 +4,8 @@ import base64
 import time
 
 
+
+
 class Home:
     def __init__(self) -> None:
         self.file_path = "57731.gif"
