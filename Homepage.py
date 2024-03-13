@@ -63,9 +63,9 @@ def main():
     with st.sidebar:
         st.sidebar.title("Navigation")
 
-        with st.sidebar.expander("Home"):
+        #with st.sidebar.expander("Home"):
             # Use buttons for dashboard selection
-            the_home_button = st.button("homepage")
+        the_home_button = st.button("homepage")
 
 
         with st.sidebar.expander("Dashboards"):
