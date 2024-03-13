@@ -65,12 +65,12 @@ def the_titanic():
 
     df = pd.DataFrame(Sex, columns=['Sex'])
 
-    bar_chart = px.bar(df['Sex'].value_counts(), x=df['Sex'].value_counts().index, y=df['Sex'].value_counts().values, 
+    pie_chart = px.pie(df['Sex'].value_counts(), x=df['Sex'].value_counts().index, y=df['Sex'].value_counts().values, 
                     labels={'x': 'Sex', 'y': 'Count'}, color=df['Sex'].value_counts().index, 
                     title='Sex Distribution')
 
     # Display the chart
-    st.plotly_chart(bar_chart,use_container_width=True)
+    st.plotly_chart(pie_chart,use_container_width=True)
     #with st.spinner(text='In progress'):
         #time.sleep(3)
         #st.success('Done')
