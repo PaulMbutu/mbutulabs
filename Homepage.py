@@ -80,32 +80,6 @@ def main():
             st.markdown("Some ways of contacting me.")
 
 
-        st.markdown(
-            """
-            <style>
-            button {
-                background: none!important;
-                border: none;
-                padding: 0!important;
-                color: white !important;
-                text-decoration: none;
-                cursor: pointer;
-                border: none !important;
-            }
-            button:hover {
-                text-decoration: none;
-                color: white !important;
-            }
-            button:focus {
-                outline: none !important;
-                box-shadow: none !important;
-                color: white !important;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
-
     # Handle dashboard selection based on button clicks
     if not the_home_button and not the_titanic_button and not bank_sales_button:
         home.show_it()
