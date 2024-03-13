@@ -64,18 +64,17 @@ def the_titanic():
     Sex            =   df['Sex'].tolist()
 
     df = pd.DataFrame(Sex, columns=['Sex'])
-    px.pie()
     pie_chart = px.pie(
                     df['Sex'].value_counts(),
-                    men     =df['Sex'].value_counts().index, 
-                    y       =df['Sex'].value_counts().values, 
+                    names   =df['Sex'].value_counts().index, 
+                    values  =df['Sex'].value_counts().values, 
                     labels  ={'x': 'Sex', 'y': 'Count'},
                     color   =df['Sex'].value_counts().index, 
                     title   ='Sex Distribution')
 
     # Display the chart
     st.plotly_chart(pie_chart,use_container_width=True)
-    st.dataframe(df['Sex'])
+
     #with st.spinner(text='In progress'):
         #time.sleep(3)
         #st.success('Done')
