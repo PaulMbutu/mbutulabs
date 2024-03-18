@@ -74,7 +74,7 @@ def the_titanic():
 
     # Display the chart
     st.plotly_chart(pie_chart,use_container_width=True)
-
+    st.dataframe(Embarked)
     #with st.spinner(text='In progress'):
         #time.sleep(3)
         #st.success('Done')
