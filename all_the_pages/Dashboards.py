@@ -51,7 +51,7 @@ def the_titanic():
     #st.dataframe(df)
 
     PassengerId    =   df['PassengerId'].unique().tolist()
-    Survived       =   df['Survived'].unique().tolist()
+    Survived       =   df['Survived'].tolist()
     Pclass         =   df['Pclass'].unique().tolist()
     Sex            =   df['Sex'].tolist()
     Age            =   df['Name'].tolist()
