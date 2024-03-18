@@ -52,7 +52,7 @@ def the_titanic():
 
     PassengerId    =   df['PassengerId'].unique().tolist()
     Survived       =   df['Survived'].tolist()
-    Pclass         =   df['Pclass'].unique().tolist()
+    Pclass         =   df['Pclass'].tolist()
     Sex            =   df['Sex'].tolist()
     Age            =   df['Name'].tolist()
     SibSp          =   df['SibSp'].unique().tolist()
@@ -62,22 +62,44 @@ def the_titanic():
     Cabin          =   df['Cabin'].unique().tolist()
     Embarked       =   df['Embarked'].unique().tolist()
 
-
-    df = pd.DataFrame(Sex, columns=['Sex'])
-    pie_chart = px.pie(
-                    df['Sex'].value_counts(),
-                    names   =df['Sex'].value_counts().index, 
-                    values  =df['Sex'].value_counts().values, 
+    df_sex = pd.DataFrame(Sex, columns=['Sex'])
+    sex_pie_chart = px.pie(
+                    df_sex['Sex'].value_counts(),
+                    names   =df_sex['Sex'].value_counts().index, 
+                    values  =df_sex['Sex'].value_counts().values, 
                     labels  ={'x': 'Sex', 'y': 'Count'},
-                    color   =df['Sex'].value_counts().index, 
+                    color   =df_sex['Sex'].value_counts().index, 
                     title   ='Sex Distribution')
+    
+    survived_count = df['Survived'].value_counts()[1]  # Get count of value 1 (survived)
+    deceased_count = df['Survived'].value_counts().get(0, 0)  # Get count of value 0 (deceased) or 0 if it doesn't exist
 
-    # Display the chart
-    st.plotly_chart(pie_chart,use_container_width=True)
-    st.dataframe(Survived)
-    st.dataframe(Age)
-    st.dataframe(Cabin)
-    st.dataframe(Pclass)
+    # Create a dictionary with counts and set an index (e.g., "Status")
+    d = {
+            "Status": ["Survived", "Deceased"],
+            "Count": [survived_count, deceased_count]
+        }
+
+    # Create DataFrame with the dictionary and explicit index
+    df_survived = pd.DataFrame(data=d)
+    
+    Survived_pie_chart  =   px.pie(
+                            df_survived,  # Data source (DataFrame)
+                            names=df_survived['Status'],  # Column names for pie slices (from index)
+                            values=df_survived['Count'],  # Column containing values for pie slice sizes
+                            labels={'Status': 'Survival Status', 'Count': 'Number of People'},  # Customize labels
+                            color=df_survived['Status'],  # Use status as color reference for slices
+                            title='Survival Rate on the Titanic',  # Set chart title
+    )
+    
+    # Display the charts
+    col1,col2=st.columns(2)
+    with col1:
+        st.plotly_chart(sex_pie_chart,use_container_width=True)
+    with col2:
+        st.plotly_chart(Survived_pie_chart,use_container_width=True)
+
+    st.dataframe(df)
     #with st.spinner(text='In progress'):
         #time.sleep(3)
         #st.success('Done')
