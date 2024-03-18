@@ -61,7 +61,7 @@ def the_titanic():
     Fare           =   df['Fare'].unique().tolist()
     Cabin          =   df['Cabin'].unique().tolist()
     Embarked       =   df['Embarked'].unique().tolist()
-    Sex            =   df['Sex'].tolist()
+
 
     df = pd.DataFrame(Sex, columns=['Sex'])
     pie_chart = px.pie(
@@ -74,7 +74,10 @@ def the_titanic():
 
     # Display the chart
     st.plotly_chart(pie_chart,use_container_width=True)
-    st.dataframe(Embarked)
+    st.dataframe(Survived)
+    st.dataframe(Age)
+    st.dataframe(Cabin)
+    st.dataframe(Pclass)
     #with st.spinner(text='In progress'):
         #time.sleep(3)
         #st.success('Done')
