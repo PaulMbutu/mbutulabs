@@ -127,7 +127,7 @@ def the_titanic():
                                y=df_emberked['Count']
                                )
     st.plotly_chart(Emberked_chart)
-    #st.dataframe(df)
+    st.dataframe(df)
     #with st.spinner(text='In progress'):
         #time.sleep(3)
         #st.success('Done')
