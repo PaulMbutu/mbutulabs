@@ -6,7 +6,10 @@ import plotly.express as px
 def the_titanic():
     st.title("The Titanic")
     st.header("Take A look at the Titanic")
-    st.markdown("This is some data from the doomed titanic ship. It had a variety of people emberking from 3 different habours")
+    st.markdown("This is some data from the doomed titanic ship. It had a variety of people emberking from 3 different habours.")
+    st.markdown("Southampton: The Titanic set sail from Southampton, England, on April 10th, 1912.")
+    st.markdown("Cherbourg: After leaving Southampton, the ship stopped in Cherbourg, France, to pick up additional passengers.")
+    st.markdown("Queenstown: The final pickup point was in Queenstown (now Cobh), Ireland, where the Titanic made its last stop before heading towards New York.")
 
     def set_bg_hack(main_bg):
         '''
@@ -49,12 +52,20 @@ def the_titanic():
                     sheet_name=sheet_name,
                     header=0)
     #st.dataframe(df)
+    selected_columns = ['Survived', 'Pclass', 'Sex', 'Age', 'Embarked']
+
+    # Count the number of null values in each of the selected columns
+    null_counts = df[selected_columns].isnull().sum()
+
+    # Print the results
+    st.markdown("a check for null values")
+    st.dataframe(null_counts)
 
     PassengerId    =   df['PassengerId'].unique().tolist()
     Survived       =   df['Survived'].tolist()
     Pclass         =   df['Pclass'].tolist()
     Sex            =   df['Sex'].tolist()
-    Age            =   df['Name'].tolist()
+    Age            =   df['Age'].tolist()
     SibSp          =   df['SibSp'].unique().tolist()
     Parch          =   df['Parch'].unique().tolist()
     Ticket         =   df['Ticket'].unique().tolist()
@@ -99,6 +110,23 @@ def the_titanic():
     with col2:
         st.plotly_chart(Survived_pie_chart,use_container_width=True)
 
+    Southampton_count   = df['Embarked'].value_counts()['S']  # Get count of value 1 (survived)
+    Cherbourg_count     = df['Embarked'].value_counts()['C']  # Get count of value 0 (deceased) or 0 if it doesn't exist
+    Queenstown_count    = df['Embarked'].value_counts()['Q']  # Get count of value 0 (deceased) or 0 if it doesn't exist
+
+    # Create a dictionary with counts and set an index (e.g., "Status")
+    d = {
+            "FROM": ["Southampton", "Cherbourg","Queenstown"],
+            "Count": [Southampton_count, Cherbourg_count,Queenstown_count]
+        }
+
+    # Create DataFrame with the dictionary and explicit index
+    df_emberked     =   pd.DataFrame(data=d)
+    Emberked_chart  =   px.bar(df_emberked,
+                               x=df_emberked["FROM"],
+                               y=df_emberked['Count']
+                               )
+    st.plotly_chart(Emberked_chart)
     st.dataframe(df)
     #with st.spinner(text='In progress'):
         #time.sleep(3)
