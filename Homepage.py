@@ -2,8 +2,8 @@ import streamlit as st
 from all_the_pages.Dashboards import the_titanic, bank_sales
 import base64
 import time
-
-
+from streamlit_option_menu import option_menu
+import streamlit_antd_components as sac
 
 
 class Home:
@@ -61,38 +61,52 @@ home = Home()
 
 def main():
     with st.sidebar:
-        st.sidebar.title("Navigation")
+        selected = option_menu(
+        menu_title = "Main Menu",
+        options = ["Home","Dashboards","Apps","Contact Us"],
+        icons = ["house","gear","activity","envelope"],
+        menu_icon = "cast",
+        default_index = 0,
+        #orientation = "horizontal",
+        
 
-        #with st.sidebar.expander("Home"):
-            # Use buttons for dashboard selection
-        the_home_button = st.button("homepage")
+    )
 
-
-        with st.sidebar.expander("Dashboards"):
-            # Use buttons for dashboard selection
-            the_titanic_button = st.button("The Titanic")
-            bank_sales_button = st.button("Bank Sales")
-
-        with st.sidebar.expander("Apps"):
-            st.markdown("Some apps you can use are coming soon.")
-
-        with st.sidebar.expander("Contacts"):
-            st.markdown("Some ways of contacting me.")
-
-
-    # Handle dashboard selection based on button clicks
-    if not the_home_button and not the_titanic_button and not bank_sales_button:
+    if selected == "Home":
         home.show_it()
-    elif the_titanic_button:
+    if selected == "Dashboards":
         the_titanic()
-    elif bank_sales_button:
-        bank_sales()
-    elif the_home_button:
-        # If no button is clicked, show the home page
+    if selected == "Apps":
+        st.header("Some apps comming soon")
+    if selected == "Contact Us":
+        st.header("Ways for contact")
+
+    with st.sidebar:
+            selected=sac.tree(
+                items=[
+                        sac.TreeItem('Home', icon='house'),
+                        sac.TreeItem('Dashboards', 
+                                     children=[
+                                                sac.TreeItem('The Titanic', icon='github'),
+                                                sac.TreeItem('Bank Sales')
+                                            ]),
+                        sac.TreeItem('Apps', disabled=True),
+                        sac.TreeItem('Contact',icon='envelope',disabled=True)
+                        ],
+                        label='MENU', index=0, align='center', size='md', icon='table', open_all=True)
+    if selected == "Home":
         home.show_it()
+    if selected == "The Titanic":
+        the_titanic()
+    if selected == "Apps":
+        st.header("Some apps comming soon")
+    if selected == "Contact Us":
+        st.header("Ways for contact")
 
 if __name__ == "__main__":
     main()
+
+
 
 
 
