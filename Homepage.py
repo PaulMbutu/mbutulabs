@@ -60,42 +60,58 @@ home = Home()
 # Main function to run the Streamlit app
 
 def main():
+    """ 
     with st.sidebar:
-        selected = option_menu(
-        menu_title = "Main Menu",
-        options = ["Home","Dashboards","Apps","Contact Us"],
-        icons = ["house","gear","activity","envelope"],
-        menu_icon = "cast",
-        default_index = 0,
-        #orientation = "horizontal",
-        
+            selected = option_menu(
+            menu_title = "Main Menu",
+            options = ["Home","Dashboards","Apps","Contact Us"],
+            icons = ["house","gear","activity","envelope"],
+            menu_icon = "cast",
+            default_index = 0,
+            #orientation = "horizontal",
+            
 
-    )
+        )
 
-    if selected == "Home":
-        home.show_it()
-    if selected == "Dashboards":
-        the_titanic()
-    if selected == "Apps":
-        st.header("Some apps comming soon")
-    if selected == "Contact Us":
-        st.header("Ways for contact")
-
+        if selected == "Home":
+            home.show_it()
+        if selected == "Dashboards":
+            the_titanic()
+        if selected == "Apps":
+            st.header("Some apps comming soon")
+        if selected == "Contact Us":
+            st.header("Ways for contact")
+    
     with st.sidebar:
             selected=sac.tree(
-                items=[
-                        sac.TreeItem('Home', icon='house'),
-                        sac.TreeItem('Dashboards', 
-                                     children=[
-                                                sac.TreeItem('The Titanic', icon='github'),
-                                                sac.TreeItem('Bank Sales')
-                                            ]),
-                        sac.TreeItem('Apps', disabled=True),
-                        sac.TreeItem('Contact',icon='envelope',disabled=True)
-                        ],
-                        label='MENU', index=0, align='center', size='md', icon='table', open_all=True)
+                                items=[
+                                        sac.TreeItem('Home', icon='house'),
+                                        sac.TreeItem('Dashboards', icon='table',
+                                                        children=[
+                                                                    sac.TreeItem('The Titanic'),
+                                                                    sac.TreeItem('Bank Sales')
+                                                                ]),
+                                        sac.TreeItem('Apps', icon="activity", disabled=True),
+                                        sac.TreeItem('Contact',icon='envelope',disabled=True)
+                                        ],
+                                label='MENU', align='left', size='xl',open_all=True
+                            )
+    """
+    with st.sidebar:
+        selected=sac.menu(
+                    items   =   [
+                                    sac.MenuItem('Home',icon='house'),
+                                    sac.MenuItem('Dashboards',icon='table',children=['The Titanic','Bank Sales']),
+                                    sac.MenuItem('Apps',icon='activity',disabled=True),
+                                    sac.MenuItem('Contact',icon='envelope',disabled=True)
+                                ]
+                )
+
+    
     if selected == "Home":
         home.show_it()
+    if selected==   'Dashboards':
+        open_this=1
     if selected == "The Titanic":
         the_titanic()
     if selected == "Apps":
