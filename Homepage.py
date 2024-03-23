@@ -72,16 +72,6 @@ def main():
             
 
         )
-
-        if selected == "Home":
-            home.show_it()
-        if selected == "Dashboards":
-            the_titanic()
-        if selected == "Apps":
-            st.header("Some apps comming soon")
-        if selected == "Contact Us":
-            st.header("Ways for contact")
-    
     with st.sidebar:
             selected=sac.tree(
                                 items=[
