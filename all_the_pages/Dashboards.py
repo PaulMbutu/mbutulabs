@@ -131,6 +131,7 @@ def the_titanic():
     #with st.spinner(text='In progress'):
         #time.sleep(3)
         #st.success('Done')
+    st.dataframe(df.query("Survived==1"))
     
 
 
