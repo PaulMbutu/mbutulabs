@@ -132,6 +132,15 @@ def the_titanic():
         #time.sleep(3)
         #st.success('Done')
     st.dataframe(df.query("Survived==1"))
+    df_sex = pd.DataFrame(Sex, columns=['Sex'])
+    survived_sex_pie_chart = px.pie(
+                    df.query("Survived==1").value_counts(),
+                    names   =df['Sex'].value_counts().index, 
+                    values  =df['Sex'].value_counts().values, 
+                    labels  ={'x': 'Sex', 'y': 'Count'},
+                    color   =df_sex['Sex'].value_counts().index, 
+                    title   ='Sex Distribution')
+    st.plotly_chart(survived_sex_pie_chart)
     
 
 
