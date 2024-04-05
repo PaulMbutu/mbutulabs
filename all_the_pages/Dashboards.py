@@ -132,7 +132,7 @@ def the_titanic():
         #time.sleep(3)
         #st.success('Done')
     st.dataframe(df.query("Survived==1"))
-
+    st.markdown("Debug new code")
     
     survived_males = df.query("Survived==1")["Sex"].value_counts()["male"]  # Get count of value 1 (survived)
     total_male = df["Sex"].value_counts()["male"]
