@@ -85,7 +85,7 @@ def the_titanic():
 
     # Create DataFrame with the dictionary and explicit index
     
-    
+    df_survived = pd.DataFrame(data=d)
     Survived_pie_chart  =   px.pie(
                             df_survived,  # Data source (DataFrame)
                             names=df_survived['Status'],  # Column names for pie slices (from index)
