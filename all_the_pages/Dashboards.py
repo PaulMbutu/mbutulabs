@@ -132,16 +132,58 @@ def the_titanic():
         #time.sleep(3)
         #st.success('Done')
     st.dataframe(df.query("Survived==1"))
-    df_sex = pd.DataFrame(Sex, columns=['Sex'])
-    df=df.query("Survived==1")
-    survived_sex_pie_chart = px.pie(
-                    df.value_counts(),
-                    names   =df['Sex'].value_counts().index, 
-                    values  =df['Sex'].value_counts().values, 
-                    labels  ={'x': 'Sex', 'y': 'Count'},
-                    color   =df['Sex'].value_counts().index, 
-                    title   ='Sex Distribution')
-    st.plotly_chart(survived_sex_pie_chart)
+
+    
+    survived_males = df.query("Survived==1")["Sex"].value_counts()["male"]  # Get count of value 1 (survived)
+    total_male = df["Sex"].value_counts()["male"]
+    deceased_males=total_male-survived_males
+
+    # Create a dictionary with counts and set an index (e.g., "Status")
+    d = {
+            "Status": ["Survived males", "Deceased males"],
+            "Count": [survived_males, deceased_males]
+        }
+
+    # Create DataFrame with the dictionary and explicit index
+    df_survived = pd.DataFrame(data=d)
+    
+    Male_Survival_pie_chart  =   px.pie(
+                            df_survived,  # Data source (DataFrame)
+                            names=df_survived['Status'],  # Column names for pie slices (from index)
+                            values=df_survived['Count'],  # Column containing values for pie slice sizes
+                            labels={'Status': 'Survival Status', 'Count': 'Number of People'},  # Customize labels
+                            color=df_survived['Status'],  # Use status as color reference for slices
+                            title='Male Survival Rate',  # Set chart title
+    )
+
+    survived_females = df.query("Survived==1")["Sex"].value_counts()["female"]  # Get count of value 1 (survived)
+    total_female = df["Sex"].value_counts()["female"]
+    deceased_females=total_female-survived_females
+
+    # Create a dictionary with counts and set an index (e.g., "Status")
+    d = {
+            "Status": ["Survived females", "Deceased females"],
+            "Count": [survived_females, deceased_females]
+        }
+
+    # Create DataFrame with the dictionary and explicit index
+    df_survived = pd.DataFrame(data=d)
+    
+    Female_Survival_pie_chart  =   px.pie(
+                            df_survived,  # Data source (DataFrame)
+                            names=df_survived['Status'],  # Column names for pie slices (from index)
+                            values=df_survived['Count'],  # Column containing values for pie slice sizes
+                            labels={'Status': 'Survival Status', 'Count': 'Number of People'},  # Customize labels
+                            color=df_survived['Status'],  # Use status as color reference for slices
+                            title='Female Survival Rate',  # Set chart title
+    )
+    
+    # Display the charts
+    col1,col2=st.columns(2)
+    with col1:
+        st.plotly_chart(Male_Survival_pie_chart,use_container_width=True)
+    with col2:
+        st.plotly_chart(Female_Survival_pie_chart,use_container_width=True)
     
 
 
