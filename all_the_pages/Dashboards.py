@@ -51,15 +51,7 @@ def the_titanic():
     df = pd.read_excel(excel_file,
                     sheet_name=sheet_name,
                     header=0)
-    #st.dataframe(df)
-    selected_columns = ['Survived', 'Pclass', 'Sex', 'Age', 'Embarked']
 
-    # Count the number of null values in each of the selected columns
-    null_counts = df[selected_columns].isnull().sum()
-
-    # Print the results
-    st.markdown("a check for null values")
-    st.dataframe(null_counts)
 
     PassengerId    =   df['PassengerId'].unique().tolist()
     Survived       =   df['Survived'].tolist()
@@ -92,7 +84,7 @@ def the_titanic():
         }
 
     # Create DataFrame with the dictionary and explicit index
-    df_survived = pd.DataFrame(data=d)
+    
     
     Survived_pie_chart  =   px.pie(
                             df_survived,  # Data source (DataFrame)
@@ -127,12 +119,11 @@ def the_titanic():
                                y=df_emberked['Count']
                                )
     st.plotly_chart(Emberked_chart)
-    st.dataframe(df)
+    
     #with st.spinner(text='In progress'):
         #time.sleep(3)
         #st.success('Done')
-    st.dataframe(df.query("Survived==1"))
-    st.markdown("Debug new code")
+
     
     survived_males = df.query("Survived==1")["Sex"].value_counts()["male"]  # Get count of value 1 (survived)
     total_male = df["Sex"].value_counts()["male"]
@@ -184,6 +175,15 @@ def the_titanic():
         st.plotly_chart(Male_Survival_pie_chart,use_container_width=True)
     with col2:
         st.plotly_chart(Female_Survival_pie_chart,use_container_width=True)
+    st.markdown("a check for null values")
+    selected_columns = ['Survived', 'Pclass', 'Sex', 'Age', 'Embarked']
+
+    # Count the number of null values in each of the selected columns
+    null_counts = df[selected_columns].isnull().sum()
+
+    # Print the results
+    st.dataframe(null_counts)
+    st.dataframe(df)
     
 
 
