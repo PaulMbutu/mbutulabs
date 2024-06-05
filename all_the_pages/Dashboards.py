@@ -64,6 +64,24 @@ def the_titanic():
     Fare           =   df['Fare'].unique().tolist()
     Cabin          =   df['Cabin'].unique().tolist()
     Embarked       =   df['Embarked'].unique().tolist()
+    Southampton_count   = df['Embarked'].value_counts()['S']  # Get count of value 1 (survived)
+    Cherbourg_count     = df['Embarked'].value_counts()['C']  # Get count of value 0 (deceased) or 0 if it doesn't exist
+    Queenstown_count    = df['Embarked'].value_counts()['Q']  # Get count of value 0 (deceased) or 0 if it doesn't exist
+
+    # Create a dictionary with counts and set an index (e.g., "Status")
+    d = {
+            "Origin": ["Southampton", "Cherbourg","Queenstown"],
+            "Count": [Southampton_count, Cherbourg_count,Queenstown_count]
+        }
+
+    # Create DataFrame with the dictionary and explicit index
+    df_emberked     =   pd.DataFrame(data=d)
+    Emberked_chart  =   px.bar(df_emberked,
+                               x=df_emberked["Origin"],
+                               y=df_emberked['Count']
+                               )
+    st.plotly_chart(Emberked_chart)
+
 
     df_sex = pd.DataFrame(Sex, columns=['Sex'])
     sex_pie_chart = px.pie(
@@ -71,7 +89,7 @@ def the_titanic():
                     names   =df_sex['Sex'].value_counts().index, 
                     values  =df_sex['Sex'].value_counts().values, 
                     labels  ={'x': 'Sex', 'y': 'Count'},
-                    color   =df_sex['Sex'].value_counts().index, 
+                    color   =df_sex['Sex'].value_counts().index,
                     title   ='Sex Distribution')
     
     survived_count = df['Survived'].value_counts()[1]  # Get count of value 1 (survived)
@@ -102,23 +120,7 @@ def the_titanic():
     with col2:
         st.plotly_chart(Survived_pie_chart,use_container_width=True)
 
-    Southampton_count   = df['Embarked'].value_counts()['S']  # Get count of value 1 (survived)
-    Cherbourg_count     = df['Embarked'].value_counts()['C']  # Get count of value 0 (deceased) or 0 if it doesn't exist
-    Queenstown_count    = df['Embarked'].value_counts()['Q']  # Get count of value 0 (deceased) or 0 if it doesn't exist
 
-    # Create a dictionary with counts and set an index (e.g., "Status")
-    d = {
-            "FROM": ["Southampton", "Cherbourg","Queenstown"],
-            "Count": [Southampton_count, Cherbourg_count,Queenstown_count]
-        }
-
-    # Create DataFrame with the dictionary and explicit index
-    df_emberked     =   pd.DataFrame(data=d)
-    Emberked_chart  =   px.bar(df_emberked,
-                               x=df_emberked["FROM"],
-                               y=df_emberked['Count']
-                               )
-    st.plotly_chart(Emberked_chart)
     
     #with st.spinner(text='In progress'):
         #time.sleep(3)
@@ -175,15 +177,15 @@ def the_titanic():
         st.plotly_chart(Male_Survival_pie_chart,use_container_width=True)
     with col2:
         st.plotly_chart(Female_Survival_pie_chart,use_container_width=True)
-    st.markdown("a check for null values")
+    #st.markdown("a check for null values")
     selected_columns = ['Survived', 'Pclass', 'Sex', 'Age', 'Embarked']
 
     # Count the number of null values in each of the selected columns
     null_counts = df[selected_columns].isnull().sum()
 
     # Print the results
-    st.dataframe(null_counts)
-    st.dataframe(df)
+    #st.dataframe(null_counts)
+    #st.dataframe(df)
     
 
 
