@@ -132,6 +132,8 @@ def main():
         open_this=1
     if selected == "The Titanic":
         the_titanic()
+    if selected == "Bank Sales":
+        bank_sales()
     if selected == "Apps":
         st.header("Some apps comming soon")
     if selected == "Contact Us":

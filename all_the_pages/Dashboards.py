@@ -190,7 +190,49 @@ def the_titanic():
 
 
 def bank_sales():
-    st.markdown("coming soon")
+    st.title("Bank Sales Data")
+    st.header("Take A look at this BAnks data")
+
+
+    def set_bg_hack(main_bg):
+        '''
+        A function to unpack an image from root folder and set as bg.
+    
+        Returns  The background.
+        '''
+        # set bg name
+        main_bg_ext = "gif"
+            
+        st.markdown(
+            f"""
+            <style>
+            .stApp {{
+                background: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()});
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed; /* Keeps the background fixed while scrolling */
+                background-position: center;
+                height: 100vh; /* Ensures full viewport height */
+                overflow-x: hidden; /* Hides horizontal overflow */
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+    set_bg_hack(r"57731.gif")
+
+
+
+
+    excel_file = "info_datasets/Bank.xlsx"
+    sheet_name = "DATA"
+
+    df = pd.read_excel(excel_file,
+                    sheet_name=sheet_name,
+                    header=0)
+    st.dataframe(df)
+ 
 
 
 
