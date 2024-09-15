@@ -233,6 +233,7 @@ def bank_sales():
                     header=0)
     st.dataframe(df)
     st.plotly_chart(px.histogram(df["age"].to_list(),title="The Age Distribution of Curstomers"))
+    st.plotly_chart(px.histogram(df["job"].to_list(),title="The Job Distribution of Curstomers"))
  
 
 
