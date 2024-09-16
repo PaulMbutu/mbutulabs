@@ -232,10 +232,16 @@ def bank_sales():
                     sheet_name=sheet_name,
                     header=0)
     st.dataframe(df)
+    st.write(df.info())
+    st.write(df.columns())
     st.plotly_chart(px.histogram(df["age"].to_list(),title="The Age Distribution of Curstomers"))
     st.plotly_chart(px.histogram(df["job"].to_list(),title="The Job Distribution of Curstomers"))
- 
-
+    st.plotly_chart(px.histogram(df["marital"].to_list(),title="The Marital Status of Curstomers"))
+    st.plotly_chart(px.histogram(df["education"].to_list(),title="The Education of Curstomers"))
+    st.plotly_chart(px.histogram(df["default"].to_list(),title="The Loan default status of Curstomers"))
+    st.plotly_chart(px.histogram(df["housing"].to_list(),title="The housing of Curstomers")) 
+    st.plotly_chart(px.histogram(df["loan"].to_list(),title="The loan status of Curstomers"))
+    st.plotly_chart(px.histogram(df["duration"].to_list(),title="The Loan durations of Curstomers"))
 
 
 

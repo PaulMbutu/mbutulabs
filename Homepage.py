@@ -135,8 +135,11 @@ def main():
     if selected == "Bank Sales":
         bank_sales()
     if selected == "Apps":
+        #no need for headers
         st.header("Some apps comming soon")
+
     if selected == "Contact Us":
+        #no need for headers
         st.header("Ways for contact")
 
 if __name__ == "__main__":

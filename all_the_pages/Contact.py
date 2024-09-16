@@ -43,3 +43,4 @@ def set_bg_hack(main_bg):
      )
 
 set_bg_hack(r"C:\Users\manch\OneDrive\Documents\dev\mbutulabs\57731.gif")
+st.text_input("You can send a message here")
