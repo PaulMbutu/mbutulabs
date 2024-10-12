@@ -5,7 +5,22 @@ import time
 from streamlit_option_menu import option_menu
 import streamlit_antd_components as sac
 
-
+def hide_streamlit_header_footer():
+    hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            #root > div:nth-child(1) > div > div > div > div > section > div {padding-top: 0rem;}
+            </style>
+            """
+    st.markdown(hide_st_style, unsafe_allow_html=True)
+def display_existing_messages():
+    if "messages" not in st.session_state:
+        st.session_state["messages"] = []
+    for message in st.session_state["messages"]:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 class Home:
     def __init__(self) -> None:
         self.file_path = "57731.gif"
@@ -43,14 +58,27 @@ class Home:
 
     def show_it(self):
         st.title("MbutuLabs")
-        st.write("Welcome to mbutulabs an interesting web app that can privide you with some usefull applications. It also serves as a portfolio so if theres a product you find functional and would like to develop a similar one,  feel free to make a request.")
-        if "my_input" not in st.session_state:
-            st.session_state["my_input"] = ""
-        my_input = st.text_input("What do you think", st.session_state["my_input"])
-        submit = st.button("Submit")
-        if submit:
-            st.session_state["my_input"] = my_input
-            st.write("So you think:", my_input)
+        st.write("Welcome to mbutulabs an interesting web app that can privide you with some usefull applications. \
+                 It also serves as a portfolio so if theres a product you find functional and would like to develop a similar one,  \
+                 feel free to make a request.\
+                 You can interact with the chatbot in this hompage.")
+        
+        hide_streamlit_header_footer()
+        display_existing_messages()
+        if "messages" not in st.session_state:
+            st.session_state["messages"] = []
+        for message in st.session_state["messages"]:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+        if prompt := st.chat_input("What's up?"):
+            with st.chat_message("user"):
+                st.markdown(prompt)
+            st.session_state["messages"].append({"role":"user","content":prompt})
+            response=f"Echo: {prompt}"
+            with st.chat_message("assistant"):
+                st.markdown(response)
+            st.session_state["messages"].append({"role":"assistant","content":response})
+
         
         self.set_bg_hack()
 
