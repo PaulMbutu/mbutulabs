@@ -1,2 +1,2 @@
 # mbutulabs
-A portfolio made with the streamlit framework.
+A webapp portfolio made with the streamlit framework.
